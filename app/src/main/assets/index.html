@@ -8,16 +8,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>SC Agris - Gestion des notes</title>
-    <link rel="manifest" href="manifest.json">
     <script>
-        if ('serviceWorker' in navigator) {
+        // N'active le Service Worker que si on est en http/https (évite l'écran noir en APK file://)
+        if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.protocol === 'http:')) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('./sw.js').then(function(reg) {
-                    console.log('Mode Hors-Ligne activé :', reg.scope);
-                }).catch(function(err) {
-                    console.log('Erreur Service Worker :', err);
-                });
+                navigator.serviceWorker.register('./sw.js').catch(function() {});
             });
+        }
+    </script>
+    <style>
         }
     </script>
     <style>
