@@ -13,6 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Sync index.html to Android assets
+        run: |
+          mkdir -p app/src/main/assets
+          if [ -f "index.html" ]; then
+            cp index.html app/src/main/assets/index.html
+          fi
+
       - name: Set up JDK 17
         uses: actions/setup-java@v5
         with:
